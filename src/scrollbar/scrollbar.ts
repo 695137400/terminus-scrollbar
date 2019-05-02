@@ -62,7 +62,9 @@ export class TerminusHtermScrollbar extends HTMLElement {
 
 		// The iframe that HTerm is hosted in
 		this.frame = terminal.content.nativeElement.querySelector('iframe');
-
+                if(!this.frame){
+                    return false;
+                }
 		// The x-screen element inside the frame that actually renders the terminal
 		this.screen = this.frame.contentDocument.querySelector('x-screen');
 
@@ -110,6 +112,7 @@ export class TerminusHtermScrollbar extends HTMLElement {
 
 	onTerminalUpdate = () : void => {
 		setTimeout(() => {
+			if(this.screen){
 			if (this.lastScrollTop !== this.screen.scrollTop || this.lastScrollHeight !== this.screen.scrollHeight) {
 				setTimeout(() => {
 					this.render();
@@ -119,6 +122,7 @@ export class TerminusHtermScrollbar extends HTMLElement {
 
 			this.lastScrollTop = this.screen.scrollTop;
 			this.lastScrollHeight = this.screen.scrollHeight;
+		}
 		}, 50);
 	}
 
