@@ -83,6 +83,9 @@ export class TerminusHtermScrollbar extends HTMLElement {
 	}
 
 	detachFromTerminal() : void {
+		if(!this.screen){
+		   return false;
+		}
 		// Stop listening to scroll events
 		this.screen.removeEventListener('scroll', this.handleInternalScroll);
 
